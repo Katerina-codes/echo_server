@@ -1,10 +1,5 @@
-import java.io.IOException;
-import java.net.ServerSocket;
+import java.net.Socket;
 
-public class Server {
-
-    public void run(ServerSocket serverSocket) throws IOException {
-        serverSocket.accept();
-    }
-
+public interface Server {
+    public void server(Socket socket);
 }
