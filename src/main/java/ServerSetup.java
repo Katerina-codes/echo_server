@@ -22,9 +22,9 @@ public class ServerSetup {
                         clientConnection = socketManager.accept();
 
                         InputStream input = clientConnection.getInputStream();
-                        InputStreamReader inputReader = new InputStreamReader(input);
-                        BufferedReader messageReader = new BufferedReader(inputReader);
-                        String message = messageReader.readLine();
+                        InputStreamReader streamReader = new InputStreamReader(input);
+                        BufferedReader lineReader = new BufferedReader(streamReader);
+                        String message = lineReader.readLine();
 
                         OutputStream output = clientConnection.getOutputStream();
                         PrintWriter writer = new PrintWriter(output);

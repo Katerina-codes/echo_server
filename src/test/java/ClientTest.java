@@ -12,12 +12,20 @@ public class ClientTest {
         Client client = new Client();
 
         ConsoleSpy consoleSpy = new ConsoleSpy();
-        client.connect(new SocketSpy(), consoleSpy);
+        SocketSpy socketSpy = new SocketSpy();
+        client.connect(socketSpy, consoleSpy);
 
         assertTrue(consoleSpy.getInputFromUserWasCalled);
+        assertTrue(socketSpy.getOutputStreamWasCalled);
     }
 
     private class SocketSpy extends Socket {
+        public boolean getOutputStreamWasCalled = false;
+
+        public OutputStream getOutputStream() {
+            getOutputStreamWasCalled = true;
+            return null;
+        }
     }
 
     private class ConsoleSpy extends Console {
@@ -28,7 +36,7 @@ public class ClientTest {
 
         public String getInputFromUser() {
             getInputFromUserWasCalled = true;
-            return "Muy Bien!" ;
+            return null;
         }
     }
 }
