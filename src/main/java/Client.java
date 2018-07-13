@@ -11,7 +11,10 @@ public class Client {
             writer.println(message);
             writer.flush();
 
-            socket.getInputStream();
+             InputStream inputStream = socket.getInputStream();
+             InputStreamReader streamReader = new InputStreamReader(inputStream);
+             BufferedReader lineReader = new BufferedReader(streamReader);
+             lineReader.readLine();
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -1,6 +1,8 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.IOException;
+
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
 
@@ -45,4 +47,10 @@ public class ClientTest {
         assertTrue(socketSpy.getInputStreamWasCalled);
     }
 
+    @Test
+    public void getsInputStreamContents() throws IOException {
+        client.connect(socketSpy, consoleSpy);
+
+        assertEquals(0, socketSpy.getInputStreamContents());
+    }
 }

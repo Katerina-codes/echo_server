@@ -1,7 +1,4 @@
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.Socket;
 
 class SocketSpy extends Socket {
@@ -12,7 +9,7 @@ class SocketSpy extends Socket {
 
     public SocketSpy() {
          outputStream = new ByteArrayOutputStream();
-         inputStream = new ByteArrayInputStream("".getBytes());
+         inputStream = new ByteArrayInputStream("Hi\n".getBytes());
     }
 
     public OutputStream getOutputStream() {
@@ -27,5 +24,9 @@ class SocketSpy extends Socket {
     public InputStream getInputStream() {
         getInputStreamWasCalled = true;
         return inputStream;
+    }
+
+    public int getInputStreamContents() throws IOException {
+        return inputStream.available();
     }
 }
