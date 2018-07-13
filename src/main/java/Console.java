@@ -4,4 +4,7 @@ public class Console {
         return "Yasss";
     }
 
+    public void printOutputToUser(String echo) {
+
+    }
 }

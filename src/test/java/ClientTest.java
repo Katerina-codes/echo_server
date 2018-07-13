@@ -53,4 +53,11 @@ public class ClientTest {
 
         assertEquals(0, socketSpy.getInputStreamContents());
     }
+
+    @Test
+    public void printsOutputToUser() {
+        client.connect(socketSpy, consoleSpy);
+
+        assertTrue(consoleSpy.printOutputToUserWasCalled);
+    }
 }
