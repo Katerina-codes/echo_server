@@ -9,7 +9,7 @@ import static org.junit.Assert.assertEquals;
 public class ClientTest {
 
     @Test
-    public void getInputFromUser() {
+    public void getInputFromUserAndCallsGetOutputStream() {
         Client client = new Client();
 
         ConsoleSpy consoleSpy = new ConsoleSpy();
@@ -31,22 +31,40 @@ public class ClientTest {
         assertEquals("Yasss\n", socketSpy.getOutputStreamContents());
     }
 
+    @Test
+    public void getsInputStream() {
+        Client client = new Client();
+
+        ConsoleSpy consoleSpy = new ConsoleSpy();
+        SocketSpy socketSpy = new SocketSpy();
+        client.connect(socketSpy, consoleSpy);
+
+        assertTrue(socketSpy.getInputStreamWasCalled);
+    }
 
     private class SocketSpy extends Socket {
         public boolean getOutputStreamWasCalled = false;
-        private OutputStream outputSream;
+        public boolean getInputStreamWasCalled = false;
+        private OutputStream outputStream;
+        private InputStream inputStream;
 
         public SocketSpy() {
-             outputSream = new ByteArrayOutputStream();
+             outputStream = new ByteArrayOutputStream();
+             inputStream = new ByteArrayInputStream("".getBytes());
         }
 
         public OutputStream getOutputStream() {
             getOutputStreamWasCalled = true;
-            return outputSream;
+            return outputStream;
         }
 
         public String getOutputStreamContents() {
-           return outputSream.toString();
+           return outputStream.toString();
+        }
+
+        public InputStream getInputStream() {
+            getInputStreamWasCalled = true;
+            return inputStream;
         }
     }
 

@@ -11,6 +11,7 @@ public class Client {
             writer.println(message);
             writer.flush();
 
+            socket.getInputStream();
         } catch (IOException e) {
             e.printStackTrace();
         }
