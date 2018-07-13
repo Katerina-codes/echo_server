@@ -20,7 +20,7 @@ public class ClientTest {
     }
 
     @Test
-    public void getsInputFromUser() {
+    public void callsGetInputFromUser() {
         client.connect(socketSpy, consoleSpy);
 
         assertTrue(consoleSpy.getInputFromUserWasCalled);
@@ -34,14 +34,14 @@ public class ClientTest {
     }
 
     @Test
-    public void socketStreamContainsInput() {
+    public void writesInputToOutputStream() {
         client.connect(socketSpy, consoleSpy);
 
         assertEquals("Yasss\n", socketSpy.getOutputStreamContents());
     }
 
     @Test
-    public void getsInputStream() {
+    public void callsGetInputStream() {
         client.connect(socketSpy, consoleSpy);
 
         assertTrue(socketSpy.getInputStreamWasCalled);
@@ -55,7 +55,7 @@ public class ClientTest {
     }
 
     @Test
-    public void printsOutputToUser() {
+    public void callsPrintOutputToUser() {
         client.connect(socketSpy, consoleSpy);
 
         assertTrue(consoleSpy.printOutputToUserWasCalled);
