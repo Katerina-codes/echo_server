@@ -1,10 +1,20 @@
+import java.io.*;
+
 public class Console {
 
-    public String getInputFromUser() {
-        return "Yasss";
+    private BufferedReader input;
+
+    public Console(ByteArrayInputStream input) {
+        this.input = new BufferedReader(new InputStreamReader(input));
+    }
+
+    public Console() {
+    }
+
+    public String getInputFromUser() throws IOException {
+       return input.readLine();
     }
 
     public void printOutputToUser(String echo) {
-
     }
 }
