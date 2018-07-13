@@ -20,28 +20,28 @@ public class ClientTest {
     }
 
     @Test
-    public void callsGetInputFromUser() {
+    public void callsGetInputFromUser() throws IOException {
         client.connect(socketSpy, consoleSpy);
 
         assertTrue(consoleSpy.getInputFromUserWasCalled);
     }
 
     @Test
-    public void callsGetOutputStream() {
+    public void callsGetOutputStream() throws IOException {
         client.connect(socketSpy, consoleSpy);
 
         assertTrue(socketSpy.getOutputStreamWasCalled);
     }
 
     @Test
-    public void writesInputToOutputStream() {
+    public void writesInputToOutputStream() throws IOException {
         client.connect(socketSpy, consoleSpy);
 
         assertEquals("Yasss\n", socketSpy.getOutputStreamContents());
     }
 
     @Test
-    public void callsGetInputStream() {
+    public void callsGetInputStream() throws IOException {
         client.connect(socketSpy, consoleSpy);
 
         assertTrue(socketSpy.getInputStreamWasCalled);
@@ -55,7 +55,7 @@ public class ClientTest {
     }
 
     @Test
-    public void callsPrintOutputToUser() {
+    public void callsPrintOutputToUser() throws IOException {
         client.connect(socketSpy, consoleSpy);
 
         assertTrue(consoleSpy.printOutputToUserWasCalled);
