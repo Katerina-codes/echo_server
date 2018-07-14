@@ -15,6 +15,7 @@ public class ServerSetup {
 
     public void startServer(int port) throws IOException {
         ServerSocket socketManager = new ServerSocket(port);
+
         Thread serverThread = new Thread(
                 () -> {
                     Socket clientConnection;
@@ -24,14 +25,16 @@ public class ServerSetup {
                         InputStream input = clientConnection.getInputStream();
                         InputStreamReader streamReader = new InputStreamReader(input);
                         BufferedReader lineReader = new BufferedReader(streamReader);
+
                         String message = lineReader.readLine();
 
-                        OutputStream output = clientConnection.getOutputStream();
-                        PrintWriter writer = new PrintWriter(output);
-                        writer.println(message);
-                        writer.flush();
-                        clientConnection.close();
-
+                        while (!message.equals("exit")) {
+                            OutputStream output = clientConnection.getOutputStream();
+                            PrintWriter writer = new PrintWriter(output);
+                            writer.println(message);
+                            writer.flush();
+                            message = lineReader.readLine();
+                        }
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

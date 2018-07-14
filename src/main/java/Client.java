@@ -15,10 +15,14 @@ public class Client {
     }
 
     public void connect(Socket socket, Console console) throws IOException {
-        String message = console.getInputFromUser();
-        writeMessageToSocket(socket, message);
-        String echo = readMessageFromSocket(socket);
-        console.printOutputToUser(echo);
+        String message = "";
+
+        while (!message.equals("exit")) {
+            message = console.getInputFromUser();
+            writeMessageToSocket(socket, message);
+            String echo = readMessageFromSocket(socket);
+            console.printOutputToUser(echo);
+        }
     }
 
     private String readMessageFromSocket(Socket socket) throws IOException {

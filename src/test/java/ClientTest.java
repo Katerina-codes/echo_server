@@ -37,7 +37,7 @@ public class ClientTest {
     public void writesInputToOutputStream() throws IOException {
         client.connect(socketSpy, consoleSpy);
 
-        assertEquals("Yasss\n", socketSpy.getOutputStreamContents());
+        assertEquals("exit\n", socketSpy.getOutputStreamContents());
     }
 
     @Test

@@ -5,7 +5,7 @@ class ConsoleSpy extends Console {
 
     public String getInputFromUser() {
         getInputFromUserWasCalled = true;
-        return "Yasss";
+        return "exit";
     }
 
     public void printOutputToUser(String echo) {
