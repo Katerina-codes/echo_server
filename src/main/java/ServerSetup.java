@@ -17,7 +17,7 @@ public class ServerSetup {
         ServerSocket socketManager = new ServerSocket(port);
         Thread serverThread = new Thread(
                 () -> {
-                    Socket clientConnection = null;
+                    Socket clientConnection;
                     try {
                         clientConnection = socketManager.accept();
 

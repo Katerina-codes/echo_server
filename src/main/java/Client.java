@@ -3,6 +3,17 @@ import java.net.Socket;
 
 public class Client {
 
+    public static void main(String[] args) {
+        Client client = new Client();
+        try {
+            Console console = new Console(System.in, System.out);
+            Socket socket = new Socket("localhost", 8080);
+            client.connect(socket, console);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void connect(Socket socket, Console console) throws IOException {
         String message = console.getInputFromUser();
         writeMessageToSocket(socket, message);
