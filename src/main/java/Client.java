@@ -16,7 +16,6 @@ public class Client {
 
     public void connect(Socket socket, Console console) throws IOException {
         String message = "";
-
         while (!message.equals("exit")) {
             message = console.getInputFromUser();
             writeMessageToSocket(socket, message);
@@ -29,7 +28,15 @@ public class Client {
         InputStream inputStream = socket.getInputStream();
         InputStreamReader streamReader = new InputStreamReader(inputStream);
         BufferedReader lineReader = new BufferedReader(streamReader);
-        return lineReader.readLine();
+        String message = lineReader.readLine();
+        return checkUserInput(message);
+    }
+
+    private String checkUserInput(String message) {
+        if (message == null) {
+            return "exit";
+        }
+        return message;
     }
 
     private void writeMessageToSocket(Socket socket, String message) throws IOException {

@@ -1,6 +1,8 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 import static junit.framework.TestCase.assertTrue;
@@ -16,7 +18,7 @@ public class ClientTest {
     public void setUp() {
         client = new Client();
         consoleSpy = new ConsoleSpy();
-        socketSpy = new SocketSpy();
+        socketSpy = new SocketSpy(new ByteArrayOutputStream(), new ByteArrayInputStream("Hi\n".getBytes()));
     }
 
     @Test
@@ -59,5 +61,14 @@ public class ClientTest {
         client.connect(socketSpy, consoleSpy);
 
         assertTrue(consoleSpy.printOutputToUserWasCalled);
+    }
+
+    @Test
+    public void handleUserEnteringExit() throws IOException {
+        SocketSpy socketSpy = new SocketSpy(new ByteArrayOutputStream(), new ByteArrayInputStream("".getBytes()));
+
+        client.connect(socketSpy, consoleSpy);
+
+        assertEquals("exit", consoleSpy.getOutputPrintedToUser());
     }
 }

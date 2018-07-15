@@ -7,9 +7,9 @@ class SocketSpy extends Socket {
     private OutputStream outputStream;
     private InputStream inputStream;
 
-    public SocketSpy() {
-         outputStream = new ByteArrayOutputStream();
-         inputStream = new ByteArrayInputStream("Hi\n".getBytes());
+    public SocketSpy(ByteArrayOutputStream outputStream, ByteArrayInputStream inputStream) {
+         this.outputStream = outputStream;
+         this.inputStream = inputStream;
     }
 
     public OutputStream getOutputStream() {
