@@ -4,7 +4,10 @@ import org.junit.Test;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.Collections;
+import java.util.List;
 
+import static java.util.Arrays.asList;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
 
@@ -17,7 +20,7 @@ public class ClientTest {
     @Before
     public void setUp() {
         client = new Client();
-        consoleSpy = new ConsoleSpy();
+        consoleSpy = new ConsoleSpy(Collections.singletonList("exit"));
         socketSpy = new SocketSpy(new ByteArrayOutputStream(), new ByteArrayInputStream("Hi\n".getBytes()));
     }
 
@@ -66,6 +69,17 @@ public class ClientTest {
     @Test
     public void handleUserEnteringExit() throws IOException {
         SocketSpy socketSpy = new SocketSpy(new ByteArrayOutputStream(), new ByteArrayInputStream("".getBytes()));
+
+        client.connect(socketSpy, consoleSpy);
+
+        assertEquals("exit", consoleSpy.getOutputPrintedToUser());
+    }
+
+    @Test
+    public void handlesEmptyUserInputFromTheConsole() throws IOException {
+        SocketSpy socketSpy = new SocketSpy(new ByteArrayOutputStream(), new ByteArrayInputStream("".getBytes()));
+        List userInputOptions = asList(null, "exit");
+        ConsoleSpy consoleSpy = new ConsoleSpy(userInputOptions);
 
         client.connect(socketSpy, consoleSpy);
 

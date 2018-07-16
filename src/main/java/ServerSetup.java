@@ -1,6 +1,7 @@
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Objects;
 
 public class ServerSetup {
 
@@ -28,7 +29,7 @@ public class ServerSetup {
 
                         String message = lineReader.readLine();
 
-                        while (!message.equals("exit")) {
+                        while (!Objects.equals(message, "exit")) {
                             OutputStream output = clientConnection.getOutputStream();
                             PrintWriter writer = new PrintWriter(output);
                             writer.println(message);

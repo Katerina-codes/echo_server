@@ -1,5 +1,6 @@
 import java.io.*;
 import java.net.Socket;
+import java.util.Objects;
 
 public class Client {
 
@@ -16,7 +17,7 @@ public class Client {
 
     public void connect(Socket socket, Console console) throws IOException {
         String message = "";
-        while (!message.equals("exit")) {
+        while (!Objects.equals(message, "exit")) {
             message = console.getInputFromUser();
             writeMessageToSocket(socket, message);
             String echo = readMessageFromSocket(socket);
